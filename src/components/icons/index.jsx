@@ -1,0 +1,9 @@
+export { default as HomeIcon } from './HomeIcon';
+export { default as MoreIcon } from './MoreIcon';
+export { default as ListsIcon } from './ListsIcon';
+export { default as ProfileIcon } from './ProfileIcon';
+export { default as LogoIcon } from './LogoIcon';
+export { default as ExploreIcon } from './ExploreIcon';
+export { default as MessagesIcon } from './MessagesIcon';
+export { default as BookmarksIcon } from './BookmarksIcon';
+export { default as NotificationsIcon } from './NotificationsIcon';
