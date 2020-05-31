@@ -11,6 +11,12 @@ const useStyles = createUseStyles({
     height: 'fit-content',
     display: 'inline-block',
     marginBottom: '8px',
+    '&.active  svg': {
+      fill: '#1da1f2'
+    },
+    '&.active  $menu_text': {
+      color: '#1da1f2'
+    },
     '&:hover $item': {
       backgroundColor: 'rgba(29, 161, 242, 0.1)'
     },

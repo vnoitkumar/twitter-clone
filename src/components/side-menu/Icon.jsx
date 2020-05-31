@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import { useLocation } from 'react-router-dom';
 import {
   HomeIcon,
   MoreIcon,
@@ -20,16 +21,27 @@ const useStyles = createUseStyles({
 
 export default function Icon({ name }) {
   const { icon } = useStyles();
+  const { pathname } = useLocation();
 
   const menuIcons = {
     more: <MoreIcon className={icon} />,
-    home: <HomeIcon isActive={true} className={icon} />,
-    lists: <ListsIcon isActive={true} className={icon} />,
-    profile: <ProfileIcon isActive={true} className={icon} />,
-    explore: <ExploreIcon isActive={true} className={icon} />,
-    messages: <MessagesIcon isActive={true} className={icon} />,
-    bookmarks: <BookmarksIcon isActive={true} className={icon} />,
-    notifications: <NotificationsIcon isActive={true} className={icon} />
+    home: <HomeIcon isActive={pathname === `/${name}`} className={icon} />,
+    lists: <ListsIcon isActive={pathname === `/${name}`} className={icon} />,
+    profile: (
+      <ProfileIcon isActive={pathname === `/${name}`} className={icon} />
+    ),
+    explore: (
+      <ExploreIcon isActive={pathname === `/${name}`} className={icon} />
+    ),
+    messages: (
+      <MessagesIcon isActive={pathname === `/${name}`} className={icon} />
+    ),
+    bookmarks: (
+      <BookmarksIcon isActive={pathname === `/${name}`} className={icon} />
+    ),
+    notifications: (
+      <NotificationsIcon isActive={pathname === `/${name}`} className={icon} />
+    )
   };
 
   return menuIcons[name];
