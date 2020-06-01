@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useLocation } from 'react-router-dom';
-import { ThemeContext } from '../../context/theme-context';
+import { ThemeContext } from '../../context';
 
 import {
   HomeIcon,

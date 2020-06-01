@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 import { primaryColors } from '../configs';
 
-export const PrimaryColorContext = createContext({
+const defaultValue = {
   primaryColor: primaryColors.blue,
   changePrimaryColor: () => {}
-});
+};
+
+export default createContext(defaultValue);

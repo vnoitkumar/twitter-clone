@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
 import Icon from './Icon';
-import { ThemeContext } from '../../context/theme-context';
+import { ThemeContext, PrimaryColorContext } from '../../context';
 
 const NOTIFICATION_COUNT_LIMIT = process.env.NOTIFICATION_COUNT_LIMIT || 9;
 
@@ -11,6 +11,8 @@ export default function MenuIcon({
   isNewTweetAvailable = false
 }) {
   const { theme } = useContext(ThemeContext);
+  const { primaryColor } = useContext(PrimaryColorContext);
+
   const useStyles = createUseStyles({
     wrapper: { position: 'relative' },
     new_tweet_indication: {
@@ -20,7 +22,7 @@ export default function MenuIcon({
       width: '7px',
       height: '7px',
       borderRadius: '50%',
-      backgroundColor: 'rgb(29, 161, 242)'
+      backgroundColor: primaryColor.color
     },
     count_indication: {
       display: 'flex',
@@ -35,7 +37,7 @@ export default function MenuIcon({
       borderRadius: '50%',
       color: 'rgb(255, 255, 255)',
       border: `1px solid ${theme.background}`,
-      backgroundColor: 'rgb(29, 161, 242)'
+      backgroundColor: primaryColor.color
     }
   });
 

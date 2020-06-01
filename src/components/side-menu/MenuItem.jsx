@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
 
 import MenuIcon from './MenuIcon';
-import { ThemeContext } from '../../context/theme-context';
+import { ThemeContext, PrimaryColorContext } from '../../context';
 
 export default function MenuItem({
   name = '',
@@ -11,6 +11,7 @@ export default function MenuItem({
   isNewTweetAvailable = false
 }) {
   const { theme } = useContext(ThemeContext);
+  const { primaryColor } = useContext(PrimaryColorContext);
 
   const useStyles = createUseStyles({
     wrapper: {
@@ -20,19 +21,19 @@ export default function MenuItem({
       display: 'inline-block',
       marginBottom: '8px',
       '&.active  svg': {
-        fill: '#1da1f2'
+        fill: primaryColor.color
       },
       '&.active  $menu_text': {
-        color: '#1da1f2'
+        color: primaryColor.color
       },
       '&:hover $item': {
-        backgroundColor: 'rgba(29, 161, 242, 0.1)'
+        backgroundColor: primaryColor.background
       },
       '&:hover $menu_text': {
-        color: '#1da1f2'
+        color: primaryColor.color
       },
       '&:hover svg': {
-        fill: '#1da1f2'
+        fill: primaryColor.color
       }
     },
     item: {
@@ -40,7 +41,9 @@ export default function MenuItem({
       alignItems: 'center',
       padding: '10px',
       width: 'fit-content',
-      borderRadius: '9999px'
+      borderRadius: '9999px',
+      transitionDuration: '0.2s',
+      transitionProperty: 'background-color'
     },
     menu_text: {
       color: theme.color,

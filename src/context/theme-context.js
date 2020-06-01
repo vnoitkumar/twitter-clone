@@ -6,4 +6,4 @@ const defaultValue = {
   changeTheme: () => {}
 };
 
-export const ThemeContext = createContext(defaultValue);
+export default createContext(defaultValue);
