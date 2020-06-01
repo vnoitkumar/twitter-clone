@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useLocation } from 'react-router-dom';
+import { ThemeContext } from '../../context/theme-context';
+
 import {
   HomeIcon,
   MoreIcon,
@@ -12,14 +14,15 @@ import {
   NotificationsIcon
 } from '../icons';
 
-const useStyles = createUseStyles({
-  icon: {
-    fill: '#fff',
-    height: '1.75rem'
-  }
-});
-
 export default function Icon({ name }) {
+  const { theme } = useContext(ThemeContext);
+  const useStyles = createUseStyles({
+    icon: {
+      fill: theme.color,
+      height: '1.75rem'
+    }
+  });
+
   const { icon } = useStyles();
   const { pathname } = useLocation();
 
