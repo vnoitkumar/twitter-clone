@@ -31,11 +31,11 @@ export const primaryColors = {
     color: '#FFAE3A',
     background: 'rgba(255, 173, 31, 0.1)'
   },
-  pink: {
+  red: {
     color: '#E1425E',
     background: 'rgba(224, 36, 94, 0.1)'
   },
-  violet: {
+  purple: {
     color: '#7B5FC4',
     background: 'rgba(121, 75, 196, 0.1)'
   },

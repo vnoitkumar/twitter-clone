@@ -24,7 +24,7 @@ function MenuIcon({
       width: '7px',
       height: '7px',
       borderRadius: '50%',
-      backgroundColor: primaryColor.color
+      backgroundColor: ({ primaryColor }) => primaryColor.color
     },
     count_indication: {
       display: 'flex',
@@ -38,13 +38,16 @@ function MenuIcon({
       fontSize: '0.7rem',
       borderRadius: '50%',
       color: '#FFFFFF',
-      border: `1px solid ${({ theme }) => theme.background}`,
-      backgroundColor: primaryColor.color
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: ({ theme }) => theme.background,
+      backgroundColor: ({ primaryColor }) => primaryColor.color
     }
   });
 
   const { wrapper, new_tweet_indication, count_indication } = useStyles({
-    theme
+    theme,
+    primaryColor
   });
 
   return (
