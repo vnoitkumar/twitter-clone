@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
+
 import { PrimaryColorContext } from '../../context';
 
-export default function TweetButton() {
+function TweetButton() {
   const { primaryColor } = useContext(PrimaryColorContext);
   const useStyles = createUseStyles({
     tweet_btn: {
@@ -22,3 +23,5 @@ export default function TweetButton() {
 
   return <button className={tweet_btn}>Tweet</button>;
 }
+
+export default TweetButton;

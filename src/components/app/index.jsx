@@ -1,82 +1,70 @@
-// External imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
 
-// Internal imports
+import Display from '../display';
 import SideMenu from '../side-menu';
-import { themes, primaryColors } from '../../configs';
-import { ThemeContext, PrimaryColorContext } from '../../context';
+
+import {
+  getTheme,
+  ThemeContext,
+  getPrimaryColor,
+  PrimaryColorContext
+} from '../../context';
 
 import {
   getLocalStorageValue,
   setLocalStorageValue
-} from '../../utils/LocalStorageUtility';
+} from '../../utils/localStorageUtility';
 
 function App() {
-  // ThemeContext Starts
-  let userPreferredThemeName = getLocalStorageValue('theme');
+  // ----- Theme Starts ----- //
+  let userPreferredThemeName = getLocalStorageValue('theme-name');
 
   if (!userPreferredThemeName) {
-    const defaultThemeName = 'default';
-    setLocalStorageValue('theme', defaultThemeName);
-    userPreferredThemeName = defaultThemeName;
+    userPreferredThemeName = 'default';
+    setLocalStorageValue('theme-name', userPreferredThemeName);
   }
 
-  const userPreferredTheme = !!themes[userPreferredThemeName]
-    ? themes[userPreferredThemeName]
-    : themes.default;
-
+  const userPreferredTheme = getTheme(userPreferredThemeName);
   const [theme, setTheme] = useState(userPreferredTheme);
+  // ----- Theme Ends ----- //
 
-  function changeTheme(themeName) {
-    const theme = !!themes[themeName] ? themes[themeName] : themes.default;
+  // ----- Primary Color Starts ----- //
+  let userPreferredPrimaryColorName = getLocalStorageValue(
+    'primary-color-name'
+  );
+
+  if (!userPreferredPrimaryColorName) {
+    userPreferredPrimaryColorName = 'default';
+    setLocalStorageValue('primary-color-name', userPreferredPrimaryColorName);
+  }
+
+  const userPreferredPrimaryColor = getPrimaryColor(
+    userPreferredPrimaryColorName
+  );
+  const [primaryColor, setPrimaryColor] = useState(userPreferredPrimaryColor);
+  // ----- Primary Color Ends ----- //
+
+  // changeTheme context function
+  function changeTheme(themeName = 'default') {
+    setLocalStorageValue('theme-name', themeName);
+
+    const theme = getTheme(themeName);
     setTheme(theme);
   }
 
-  const _theme = {
-    theme,
-    changeTheme
-  };
-  // ThemeContext Ends
+  // changePrimaryColor context function
+  function changePrimaryColor(primaryColorName = 'default') {
+    setLocalStorageValue('primary-color-name', primaryColorName);
 
-  // PrimaryColorContext Starts
-  let userPreferredPrimaryColorName = getLocalStorageValue('primary-color');
-
-  if (!userPreferredPrimaryColorName) {
-    const defaultPrimaryColorName = 'default';
-    setLocalStorageValue('primary-color', defaultPrimaryColorName);
-    userPreferredPrimaryColorName = defaultPrimaryColorName;
-  }
-
-  const userPreferredPrimaryColor = !!primaryColors[
-    userPreferredPrimaryColorName
-  ]
-    ? primaryColors[userPreferredPrimaryColorName]
-    : primaryColors.default;
-
-  const [primaryColor, setPrimaryColor] = useState(userPreferredPrimaryColor);
-
-  function changePrimaryColor(primaryColorName) {
-    const primaryColor = !!primaryColors[primaryColorName]
-      ? primaryColors[primaryColorName]
-      : primaryColors.default;
+    const primaryColor = getPrimaryColor(primaryColorName);
     setPrimaryColor(primaryColor);
   }
-
-  const _primaryColor = {
-    primaryColor,
-    changePrimaryColor
-  };
-  // PrimaryColorContext Ends
 
   const useStyles = createUseStyles({
     '@global': {
       ':root': {
         fontSize: '15px'
-      },
-      body: {
-        color: theme.color,
-        backgroundColor: theme.background
       }
     },
     container: {
@@ -94,11 +82,21 @@ function App() {
     }
   });
 
-  const { container, main, side_bar_right } = useStyles();
+  const { container, main, side_bar_right } = useStyles({ theme });
+
+  useEffect(
+    function onThemeChanged() {
+      document.body.style = `color: ${theme.color}; background: ${theme.background};`;
+    },
+    [theme]
+  );
 
   return (
-    <ThemeContext.Provider value={_theme}>
-      <PrimaryColorContext.Provider value={_primaryColor}>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
+      <PrimaryColorContext.Provider
+        value={{ primaryColor, changePrimaryColor }}
+      >
+        <Display />
         <div className={container}>
           <SideMenu />
           <main className={main}></main>
