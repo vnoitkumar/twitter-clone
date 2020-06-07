@@ -1,6 +1,7 @@
 import React from 'react';
-import MenuItem from './MenuItem';
 import { createUseStyles } from 'react-jss';
+
+import MenuItem from './MenuItem';
 
 const menus = [
   'home',
@@ -17,7 +18,7 @@ const useStyles = createUseStyles({
   nav_bar: { margin: '3px 0px 5px 0px' }
 });
 
-export default function MenuItems() {
+function MenuItems() {
   const { nav_bar } = useStyles();
 
   const menuItems = menus.map(function (menuName) {
@@ -37,3 +38,5 @@ export default function MenuItems() {
     </nav>
   );
 }
+
+export default MenuItems;

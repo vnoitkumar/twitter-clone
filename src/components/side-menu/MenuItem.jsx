@@ -1,55 +1,61 @@
-import React from 'react';
-import { createUseStyles } from 'react-jss';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { createUseStyles } from 'react-jss';
 
 import MenuIcon from './MenuIcon';
+import { ThemeContext, PrimaryColorContext } from '../../context';
 
-const useStyles = createUseStyles({
-  wrapper: {
-    textDecoration: 'none',
-    width: '100%',
-    height: 'fit-content',
-    display: 'inline-block',
-    marginBottom: '8px',
-    '&.active  svg': {
-      fill: '#1da1f2'
-    },
-    '&.active  $menu_text': {
-      color: '#1da1f2'
-    },
-    '&:hover $item': {
-      backgroundColor: 'rgba(29, 161, 242, 0.1)'
-    },
-    '&:hover $menu_text': {
-      color: '#1da1f2'
-    },
-    '&:hover svg': {
-      fill: '#1da1f2'
-    }
-  },
-  item: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px',
-    width: 'fit-content',
-    borderRadius: '9999px'
-  },
-  menu_text: {
-    color: '#fff',
-    marginRight: '15px',
-    marginLeft: '20px',
-    fontSize: '19px',
-    fontWeight: '700',
-    textTransform: 'capitalize'
-  }
-});
-
-export default function MenuItem({
+function MenuItem({
   name = '',
   notificationCount = 0,
   isNewTweetAvailable = false
 }) {
-  const { wrapper, item, menu_text } = useStyles();
+  const { theme } = useContext(ThemeContext);
+  const { primaryColor } = useContext(PrimaryColorContext);
+
+  const useStyles = createUseStyles({
+    wrapper: {
+      textDecoration: 'none',
+      width: '100%',
+      height: 'fit-content',
+      display: 'inline-block',
+      marginBottom: '8px',
+      '&.active  svg': {
+        fill: primaryColor.color
+      },
+      '&.active  $menu_text': {
+        color: primaryColor.color
+      },
+      '&:hover $item': {
+        backgroundColor: primaryColor.background
+      },
+      '&:hover $menu_text': {
+        color: primaryColor.color
+      },
+      '&:hover svg': {
+        fill: primaryColor.color
+      }
+    },
+    item: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: '10px',
+      width: 'fit-content',
+      borderRadius: '9999px',
+      transitionDuration: '0.2s',
+      transitionProperty: 'background-color'
+    },
+    menu_text: {
+      color: ({ theme }) => theme.color,
+      marginRight: '15px',
+      marginLeft: '20px',
+      fontSize: '1.25rem',
+      fontWeight: '700',
+      textTransform: 'capitalize'
+    }
+  });
+
+  const { wrapper, item, menu_text } = useStyles({ theme });
 
   return (
     <NavLink className={wrapper} to={`/${name}`} exact>
@@ -64,3 +70,5 @@ export default function MenuItem({
     </NavLink>
   );
 }
+
+export default MenuItem;
