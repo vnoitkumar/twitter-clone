@@ -1,18 +1,24 @@
 export const themes = {
   default: {
+    name: 'Default',
     color: '#14161A',
     background: '#FFFFFF',
-    logoFill: '#1DA1F2'
+    logoFill: '#1DA1F2',
+    modelWrapperBackground: 'rgba(0, 0, 0, 0.4)'
   },
   dim: {
+    name: 'Dim',
     color: '#FFFFFF',
     background: '#15202B',
-    logoFill: '#FFFFFF'
+    logoFill: '#FFFFFF',
+    modelWrapperBackground: 'rgba(110, 118, 125, 0.4)'
   },
-  lightsOut: {
+  lights_out: {
+    name: 'Lights out',
     color: '#D9D9D9',
     background: '#000000',
-    logoFill: '#D9D9D9'
+    logoFill: '#D9D9D9',
+    modelWrapperBackground: 'rgba(110, 118, 125, 0.4)'
   }
 };
 

@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 import MenuIcon from './MenuIcon';
 import { ThemeContext, PrimaryColorContext } from '../../context';
 
-export default function MenuItem({
+function MenuItem({
   name = '',
   notificationCount = 0,
   isNewTweetAvailable = false
@@ -46,7 +46,7 @@ export default function MenuItem({
       transitionProperty: 'background-color'
     },
     menu_text: {
-      color: theme.color,
+      color: ({ theme }) => theme.color,
       marginRight: '15px',
       marginLeft: '20px',
       fontSize: '1.25rem',
@@ -55,7 +55,7 @@ export default function MenuItem({
     }
   });
 
-  const { wrapper, item, menu_text } = useStyles();
+  const { wrapper, item, menu_text } = useStyles({ theme });
 
   return (
     <NavLink className={wrapper} to={`/${name}`} exact>
@@ -70,3 +70,5 @@ export default function MenuItem({
     </NavLink>
   );
 }
+
+export default MenuItem;

@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
+
 import { LogoIcon } from '../icons';
 import { ThemeContext } from '../../context';
 
-export default function Logo({ brandName = 'Twitter', path = '/' }) {
+function Logo({ brandName = 'Twitter', path = '/' }) {
   const { theme } = useContext(ThemeContext);
   const useStyles = createUseStyles({
     wrapper: { margin: '2px 0', display: 'inline-flex' },
@@ -16,11 +17,11 @@ export default function Logo({ brandName = 'Twitter', path = '/' }) {
       }
     },
     logo: {
-      fill: theme.logoFill,
+      fill: ({ theme }) => theme.logoFill,
       height: '2rem'
     }
   });
-  const { wrapper, link, logo } = useStyles();
+  const { wrapper, link, logo } = useStyles({ theme });
 
   return (
     <span className={wrapper}>
@@ -30,3 +31,5 @@ export default function Logo({ brandName = 'Twitter', path = '/' }) {
     </span>
   );
 }
+
+export default Logo;
