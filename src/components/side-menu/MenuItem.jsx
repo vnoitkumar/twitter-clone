@@ -21,19 +21,19 @@ function MenuItem({
       display: 'inline-block',
       marginBottom: '8px',
       '&.active  svg': {
-        fill: primaryColor.color
+        fill: ({ primaryColor }) => primaryColor.color
       },
       '&.active  $menu_text': {
-        color: primaryColor.color
+        color: ({ primaryColor }) => primaryColor.color
       },
       '&:hover $item': {
-        backgroundColor: primaryColor.background
+        backgroundColor: ({ primaryColor }) => primaryColor.background
       },
       '&:hover $menu_text': {
-        color: primaryColor.color
+        color: ({ primaryColor }) => primaryColor.color
       },
       '&:hover svg': {
-        fill: primaryColor.color
+        fill: ({ primaryColor }) => primaryColor.color
       }
     },
     item: {
@@ -55,7 +55,7 @@ function MenuItem({
     }
   });
 
-  const { wrapper, item, menu_text } = useStyles({ theme });
+  const { wrapper, item, menu_text } = useStyles({ theme, primaryColor });
 
   return (
     <NavLink className={wrapper} to={`/${name}`} exact>
