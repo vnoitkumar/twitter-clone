@@ -58,8 +58,6 @@ function App() {
     setLocalStorageValue('primary-color-name', primaryColorName);
 
     const primaryColor = getPrimaryColor(primaryColorName);
-    console.log(primaryColor);
-
     setPrimaryColor(primaryColor);
   }
 
