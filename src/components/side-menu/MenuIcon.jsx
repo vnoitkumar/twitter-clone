@@ -23,7 +23,7 @@ function MenuIcon({
       right: '1px',
       width: '7px',
       height: '7px',
-      borderRadius: '50%',
+      borderRadius: '9999px',
       backgroundColor: ({ primaryColor }) => primaryColor.color
     },
     count_indication: {
@@ -36,7 +36,7 @@ function MenuIcon({
       height: '1.8em',
       minWidth: '1.8em',
       fontSize: '0.7rem',
-      borderRadius: '50%',
+      borderRadius: '9999px',
       color: '#FFFFFF',
       borderWidth: '1px',
       borderStyle: 'solid',

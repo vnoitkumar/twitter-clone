@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
+import { useLocation } from 'react-router-dom';
 
 import MenuIcon from './MenuIcon';
 import { ThemeContext, PrimaryColorContext } from '../../context';
@@ -56,9 +57,17 @@ function MenuItem({
   });
 
   const { wrapper, item, menu_text } = useStyles({ theme, primaryColor });
+  let location = useLocation();
 
   return (
-    <NavLink className={wrapper} to={`/${name}`} exact>
+    <NavLink
+      className={wrapper}
+      to={{
+        pathname: `/${name}`,
+        state: { background: name === 'more' ? location : null }
+      }}
+      exact
+    >
       <span className={item}>
         <MenuIcon
           name={name}

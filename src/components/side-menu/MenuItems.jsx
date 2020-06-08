@@ -26,7 +26,9 @@ function MenuItems() {
       <MenuItem
         key={menuName}
         name={menuName}
-        notificationCount={menuName === 'notifications' && 2} // Dummy condition
+        notificationCount={
+          (menuName === 'notifications' || menuName === 'messages') && 2
+        } // Dummy condition
         isNewTweetAvailable={menuName === 'home'} // Dummy condition
       />
     );

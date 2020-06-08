@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
-
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
 import Display from '../display';
 import SideMenu from '../side-menu';
 
@@ -91,15 +91,38 @@ function App() {
     [theme]
   );
 
+  let location = useLocation();
+  let background = location.state && location.state.background;
+
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
       <PrimaryColorContext.Provider
         value={{ primaryColor, changePrimaryColor }}
       >
-        <Display />
+        {background ? (
+          <Route exact path='/more' children={<Display />} />
+        ) : location.pathname === '/more' ? (
+          <Redirect to='/' />
+        ) : null}
+
         <div className={container}>
           <SideMenu />
-          <main className={main}></main>
+          <main className={main}>
+            <Switch location={background || location}>
+              <Route exact path='/' children={<Redirect to='/home' />} />
+              <Route exact path='/home' children={<h1>Home</h1>} />
+              <Route exact path='/explore' children={<h1>Explore</h1>} />
+              <Route
+                exact
+                path='/notifications'
+                children={<h1>Notifications</h1>}
+              />
+              <Route exact path='/messages' children={<h1>Messages</h1>} />
+              <Route exact path='/bookmarks' children={<h1>Bookmarks</h1>} />
+              <Route exact path='/lists' children={<h1>Lists</h1>} />
+              <Route exact path='/profile' children={<h1>Profile</h1>} />
+            </Switch>
+          </main>
           <aside className={side_bar_right}></aside>
         </div>
       </PrimaryColorContext.Provider>

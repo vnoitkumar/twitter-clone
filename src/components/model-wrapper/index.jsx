@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
+import { useHistory } from 'react-router-dom';
 
 import { ThemeContext } from '../../context';
 
@@ -22,7 +23,24 @@ function ModelWrapper({ children }) {
   const { theme } = useContext(ThemeContext);
   const { model_wrapper } = useStyles({ theme });
 
-  return <div className={model_wrapper}>{children}</div>;
+  let history = useHistory();
+
+  function goBack(event) {
+    event.stopPropagation();
+
+    const target = event.target;
+    if (target.id !== 'model_wrapper') {
+      return; // child was clicked, ignore onClick
+    }
+
+    history.goBack();
+  }
+
+  return (
+    <div onClick={goBack} className={model_wrapper} id='model_wrapper'>
+      {children}
+    </div>
+  );
 }
 
 export default ModelWrapper;
