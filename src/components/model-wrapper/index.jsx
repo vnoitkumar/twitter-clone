@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useHistory } from 'react-router-dom';
 
@@ -24,6 +24,22 @@ function ModelWrapper({ children }) {
   const { model_wrapper } = useStyles({ theme });
 
   let history = useHistory();
+
+  useEffect(
+    function addEventListenerForEscKey() {
+      function handelEscKeyPress(event) {
+        if (event.keyCode === 27) {
+          history.goBack();
+        }
+      }
+      document.addEventListener('keydown', handelEscKeyPress, false);
+
+      return function removeEventListenerForEscKey() {
+        document.removeEventListener('keydown', handelEscKeyPress, false);
+      };
+    },
+    [history]
+  );
 
   function goBack(event) {
     event.stopPropagation();

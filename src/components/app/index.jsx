@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
 import Display from '../display';
 import SideMenu from '../side-menu';
+import Home from '../home';
 
 import {
   getTheme,
@@ -110,7 +111,7 @@ function App() {
           <main className={main}>
             <Switch location={background || location}>
               <Route exact path='/' children={<Redirect to='/home' />} />
-              <Route exact path='/home' children={<h1>Home</h1>} />
+              <Route exact path='/home' children={<Home />} />
               <Route exact path='/explore' children={<h1>Explore</h1>} />
               <Route
                 exact
